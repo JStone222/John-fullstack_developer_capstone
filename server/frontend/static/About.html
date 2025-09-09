@@ -1,68 +1,111 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Link the style sheet here -->
+    <meta charset="UTF-8">
+    <title>About Us - Best Cars Dealership</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .banner {
+            text-align: center;
+            padding: 2rem;
+            background-color: #e0f7fa;
+            border-bottom: 2px solid #00bcd4;
+        }
+        .card-deck {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        .card {
+            margin: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card img {
+            height: 300px;
+            object-fit: cover;
+        }
+        .title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<div>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
-    <div class="container-fluid">
-      <h2 style="padding-right: 5%;">Dealerships</h2>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
-    <div class="card" style="width: 80%;margin: auto; margin-top:5%;">
-      <div class="banner" name="about-header">
-      <!-- Insert header information here -->
-      </div>
-      <div style="display: flex;flex-direction: row; margin:auto">
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person1</p>
-          <p>Person1 Title</p>
-          <p class="card-text">Some text that explains the person1 in about 2 short sentences</p>
-          <p>person1@example.com</p>
-        </div>
-      </div>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person2</p>
-          <p>Person2 Title</p>
-          <p class="card-text">Some text that explains the person2 in about 2 short sentences</p>
-          <p>person2@example.com</p>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+        <div class="container-fluid">
+            <span class="navbar-brand text-white">Dealerships</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: larger;" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
+    </nav>
 
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person3</p>
-          <p>Person3 Title</p>
-          <p class="card-text">Some text that explains the person3 in about 2 short sentences</p>
-          <p>person3@example.com</p>
+    <div class="banner">
+        <h1>About Us</h1>
+        <p>Welcome to <strong>Best Cars Dealership</strong>, your trusted partner for high-quality vehicles across North America. Whether you're looking for domestic or imported cars, we offer a handpicked selection at competitive prices with a commitment to excellent customer service.</p>
+    </div>
+
+    <div class="card-deck">
+
+        <!-- Person 1 -->
+        <div class="card" style="width: 30%;">
+            <img class="card-img-top" src="/static/John TP101.jpg" alt="John's photo">
+            <div class="card-body">
+                <p class="title">John Miller</p>
+                <p>Co-Founder & Head of Sales</p>
+                <p class="card-text">John brings over 10 years of automotive sales expertise. He’s passionate about connecting customers with the perfect car and ensuring a smooth experience from start to finish.</p>
+                <p>john.miller@bestcars.com</p>
+            </div>
         </div>
-      </div>
-    </div>
-    </div>
-    </div>
-    
-</div>
 
+        <!-- Person 2 -->
+        <div class="card" style="width: 30%;">
+            <img class="card-img-top" src="/static/person.png" alt="Sarah's photo">
+            <div class="card-body">
+                <p class="title">Sarah Nguyen</p>
+                <p>Marketing Director</p>
+                <p class="card-text">Sarah leads all marketing efforts at Best Cars, with a focus on digital engagement and brand strategy. She’s a firm believer in honest advertising and transparency.</p>
+                <p>sarah.nguyen@bestcars.com</p>
+            </div>
+        </div>
+
+        <!-- Person 3 -->
+        <div class="card" style="width: 30%;">
+            <img class="card-img-top" src="/static/person.png" alt="Michael's photo">
+            <div class="card-body">
+                <p class="title">Michael Thompson</p>
+                <p>Lead Mechanic & Inspector</p>
+                <p class="card-text">With over 15 years in automotive repair, Michael ensures every vehicle is in top condition before hitting the lot. Safety and quality are his top priorities.</p>
+                <p>michael.t@bestcars.com</p>
+            </div>
+        </div>
+
+    </div>
+</body>
 </html>
