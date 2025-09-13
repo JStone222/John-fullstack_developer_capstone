@@ -29,13 +29,19 @@ SECRET_KEY =\
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'stonejohn202-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai',
+    (
+    'stonejohn202-8000.theiadockernext-1-labs-prod-'
+    'theiak8s-4-tor01.proxy.cognitiveclass.ai'
+    ),
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://stonejohn202-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai'
+    (
+    'https://stonejohn202-8000.theiadockernext-1-labs-'
+    'prod-theiak8s-4-tor01.proxy.cognitiveclass.ai'
+    ),
 ]
 
 
@@ -102,7 +108,10 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
-        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        (
+        'django.contrib.auth.password_validation.'
+        'UserAttributeSimilarityValidator'
+        ),
     },
     {
         'NAME':
@@ -151,4 +160,3 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/build'),
     os.path.join(BASE_DIR, 'frontend/build/static'),
 ]
-
