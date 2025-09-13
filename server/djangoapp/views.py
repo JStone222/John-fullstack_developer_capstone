@@ -13,6 +13,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
+from .utils import analyze_review_sentiments  # Adjust the path as needed
 
 
 # Get an instance of a logger
@@ -141,7 +142,7 @@ def add_review(request):
             response = analyze_review_sentiments(review_detail['review'])
             print(response)
             review_detail['sentiment'] = response['sentiment']
-        return JsonResponse({"status":200,"reviews":reviews})
+        return JsonResponse({"status": 200, "reviews": reviews})
     else:
         return JsonResponse({"status": 400, "message": "Bad Request"})
 # # Update the `get_dealerships` view to render the index page with
