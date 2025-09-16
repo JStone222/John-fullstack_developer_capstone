@@ -4,17 +4,12 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-# Create your models here.
-
-
-
 class CarMake(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.name}"
-
 
 
 class CarModel(models.Model):
@@ -43,6 +38,7 @@ class CarModel(models.Model):
         default=2023,
     )
 
-
     def __str__(self):
-        return f"{self.name} ({self.type}) - {self.year}"
+        return (
+            f"{self.name} ({self.type}) - {self.year}"
+        )
