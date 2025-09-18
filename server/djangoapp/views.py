@@ -8,7 +8,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
-from .utils import analyze_review_sentiments  # Adjust the path as needed
+from .restapis import analyze_review_sentiments  # Adjust the path as needed
 from .restapis import get_request, post_review
 import requests
 
@@ -85,58 +85,59 @@ def get_cars(request):
     return JsonResponse({"CarModels": cars})
 
 
+#Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
 def get_dealerships(request, state="All"):
-    endpoint = "/fetchDealers" if state == "All" else f"/fetchDealers/{state}"
+    if(state == "All"):
+        endpoint = "/fetchDealers"
+    else:
+        endpoint = "/fetchDealers/"+state
     dealerships = get_request(endpoint)
-    return JsonResponse({
-        "status": 200,
-        "dealers": dealerships
-    })
+    return JsonResponse({"status":200,"dealers":dealerships})
 
 
 def get_dealer_details(request, dealer_id):
-    if dealer_id is not None:
+    if dealer_id:
         endpoint = f"/fetchDealer/{dealer_id}"
-        dealership = get_request(endpoint)
-        return JsonResponse({
-            "status": 200,
-            "dealer": dealership
-        })
-    return JsonResponse({"status": 400, "message": "Bad Request"})
+        dealerships = get_request(endpoint)
+
+        if dealerships and isinstance(dealerships, list):
+            dealer = dealerships[0]  # take the first dealer
+        else:
+            dealer = dealerships  # already a single object
+
+        return JsonResponse({"status": 200, "dealer": dealer})
+    else:
+        return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
-def get_dealer_reviews(request, dealer_id):
-    if dealer_id is not None:
-        endpoint = f"/fetchReviews/dealer/{dealer_id}"
-        reviews = get_request(endpoint)
-        for review_detail in reviews:
-            sentiment_data = analyze_review_sentiments(
-                review_detail['review']
-            )
-            review_detail['sentiment'] = (
-                sentiment_data.get('sentiment', 'unknown')
-                if sentiment_data else 'unknown'
-            )
-        return JsonResponse({
-            "status": 200,
-            "reviews": reviews
-        })
-    return JsonResponse({"status": 400, "message": "Bad Request"})
-
+def get_dealer_reviews(request, dealer_id): 
+    # if dealer id has been provided 
+    if(dealer_id): 
+        endpoint = "/fetchReviews/dealer/"+str(dealer_id) 
+        reviews = get_request(endpoint) 
+        for review_detail in reviews: 
+            response = analyze_review_sentiments(review_detail['review']) 
+            print(response) 
+            review_detail['sentiment'] = response['sentiment'] 
+        return JsonResponse({"status":200,"reviews":reviews}) 
+    else: 
+        return JsonResponse({"status":400,"message":"Bad Request"})
 
 def add_review(request):
-    if request.user.is_anonymous:
-        return JsonResponse({
-            "status": 403,
-            "message": "Unauthorized"
-        })
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            # Optional: If you want to enforce auth, check here
+            if request.user.is_anonymous:
+                logger.warning("Anonymous user posting review")
+                # return JsonResponse({"status":403,"message":"Unauthorized"})
+                # OR just allow it:
+                pass  
 
-    data = json.loads(request.body)
-    try:
-        post_review(data)
-        return JsonResponse({"status": 200})
-    except requests.exceptions.RequestException:
-        return JsonResponse({
-            "status": 401,
-            "message": "Error in posting review"
-        })
+            response = post_review(data)
+            return JsonResponse({"status":200})
+        except Exception as e:
+            logger.error(f"Error posting review: {e}")
+            return JsonResponse({"status":400,"message":str(e)})
+    else:
+        return JsonResponse({"status":405,"message":"Method not allowed"})
